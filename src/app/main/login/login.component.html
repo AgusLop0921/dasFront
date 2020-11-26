@@ -1,0 +1,31 @@
+<div class="col-md-4 offset-md-4 mt-5">
+    <div class="card py-3">
+        <div class="row mb-3">
+            <div class="col-md-8 offset-md-2">
+                <img width="100%" src="./assets/images/blas-pascal-icon.jpg">
+            </div>
+        </div>
+        <form [formGroup]="loginForm" method="post" novalidate (ngSubmit)="login()">
+            <div class="row mb-4">
+                <div class="col-10 offset-1 col-md-10 offset-md-1">
+                    <label for="iemail">Email</label>
+                    <input type="email" class="form-control" id="iemail" formControlName="email" placeholder="Ingresa tu correo">
+                    <small *ngIf="submitted && form.email.errors" class="text-danger">
+                        <span *ngIf="form.email.errors.required">Debes informar tu correo</span>
+                        <span *ngIf="form.email.errors.email || form.email.errors.pattern">El correo no es válido</span>
+                    </small>
+                </div>	
+            </div>
+            <div class="row mb-4">
+                <div class="col-10 offset-1 col-md-10 offset-md-1">
+                    <label for="ipassword">Password</label>
+                    <input type="password" class="form-control" id="iapellido" formControlName="password" placeholder="******************">
+                    <small *ngIf="submitted && form.password.errors?.required" class="text-danger">Debes ingresar tu contrasenia</small>
+                </div>	
+            </div>
+            <div class="row mt-5">
+                <button class="btn btn-primary col-md-6 offset-md-3 col-10 offset-1">Ingresar</button>
+            </div>
+        </form>
+    </div>
+</div>
