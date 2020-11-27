@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Validar } from 'src/app/api/models/validar';
 import { Users } from 'src/app/api/services/users.service';
-import { UsuariosResourceService } from 'src/app/api/services/usuarios-resource.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
     private _fb: FormBuilder,
     private _router: Router,
     private _authService: AuthService,
-    private _service: UsuariosResourceService,
     private _userService: Users
   ) {   
 

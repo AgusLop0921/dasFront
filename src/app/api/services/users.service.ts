@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { Validar } from '../models/validar';
-import { Token } from '../models/usuario';
+import { Token, Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +30,15 @@ export class Users {
     const body = new HttpParams().set('correo', user.correo).set('clave', user.clave);
     return this.http.post<Token>(`${this.url}/login`, body ,this.httpOptions);
   }
+
+  // public getUserData(): Observable<any>{
+  //   const token = sessionStorage.getItem('token');
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Autorization': 'Bearer alsjdaksjlbaskfaskfas'
+  //     }),
+  //   };
+  //   return this.http.get<any>(`${this.url}/user`,this.httpOptions);
+  // }
 }

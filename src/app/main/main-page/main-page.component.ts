@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Users } from 'src/app/api/services/users.service';
 
 @Component({
   selector: 'app-main-page',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _userService: Users
+  ) { }
 
   ngOnInit(): void {
+    // this._userService.getUserData()
+    //   .subscribe(response=>{
+    //     console.log(response);
+    //   })
   }
 
+  cerrarSesion(){
+    sessionStorage.removeItem('token');
+    window.location.reload();
+  }
 }
