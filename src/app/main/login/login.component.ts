@@ -49,15 +49,14 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     let user: Validar = {
-      email: 'mpastarini@ubp.edu.ar',
-      password: 'pyxis'
+      correo: this.form.email.value,
+      clave: this.form.password.value
     }
     if(this.loginForm.valid){
       console.log(this.loginForm.value);
       this._userService.login(user)
         .subscribe(result => {
-            sessionStorage.setItem('token', 'asdasADAUDHASDasdqd2522')
-            sessionStorage.Apellido = 'Márquez Montoya'
+            sessionStorage.setItem('token', result)
             this._authService.setLogueado();
             this._router.navigate(['/main/home']); 
         })

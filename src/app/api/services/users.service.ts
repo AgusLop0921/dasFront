@@ -12,8 +12,7 @@ export class Users {
   public redirectAfterLogin = ""
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'text/plain',
-      // 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/x-www-form-urlencoded'
     }),
   };
   constructor (
@@ -25,7 +24,7 @@ export class Users {
   }
 
   public login(user: Validar): Observable<any> {
-    return this.http.post(`http://a3639a990113.ngrok.io/Parcial3/api/login`,user)
+    return this.http.post(`${this.url}/login`,user, this.httpOptions);
   }
 
 }

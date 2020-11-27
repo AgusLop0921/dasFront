@@ -1,4 +1,4 @@
 export interface Validar {
-    email: string;
-    password: string;
+    correo: string;
+    clave: string;
 }
