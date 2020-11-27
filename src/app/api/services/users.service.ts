@@ -3,11 +3,11 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { Validar } from '../models/validar';
+import { Token } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class Users {
   private url = ` ${environment.apiUrl}` 
   public redirectAfterLogin = ""
@@ -26,16 +26,8 @@ export class Users {
     return this.http.get(`${this.url}`)
   }
 
-  public login(user: Validar): Observable<any> {
-    const httpOptions2 = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', }), }; 
-    // const body = new HttpParams().set('correo', 'mpastarini@ubp.edu.ar').set('clave', 'pyxis'); 
- 
-    // const body = {
-    //   correo: 'mpastarini@ubp.edu.ar',
-    //   clave: 'pyxis'
-    // }
-    const body = new HttpParams().set('correo', 'mpastarini@ubp.edu.ar').set('clave', 'pyxis');
-    return this.http.post(`${this.url}/login`, body ,this.httpOptions);
+  public login(user: Validar): Observable<Token> {
+    const body = new HttpParams().set('correo', user.correo).set('clave', user.clave);
+    return this.http.post<Token>(`${this.url}/login`, body ,this.httpOptions);
   }
-
 }

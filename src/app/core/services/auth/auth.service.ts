@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core'
+import { BehaviorSubject } from 'rxjs';
+import { Token } from 'src/app/api/models/usuario';
 
 @Injectable()
 export class AuthService {
 
-    public logueado:boolean = false;
+    public userSubject: BehaviorSubject<Token> ;
 
-    login(){
-      if(this.logueado){
-        return true;
-      }else{
-        return false
-      }
+    constructor() {
+      this.userSubject = new BehaviorSubject<Token>({token: sessionStorage.getItem('token')});
     }
-    setLogueado(): void{
-      this.logueado = true;
+    // login(){
+    //   return this.logueado
+    // }
+    // setLogueado(): void{
+    //   this.logueado = true;
+    // }
+
+    public get userValue(): Token {
+      return this.userSubject.value;
+    }
+
+    nextUserSubject(user: Token) {
+      this.userSubject.next(user);
     }
 }

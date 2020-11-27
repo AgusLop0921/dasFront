@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpInterceptorService } from './core/services/inteceptors/http-interceptor.service';
 import { ResourceModule } from '@ngx-resource/handler-ngx-http';
+import { AuthService } from './core/services/auth/auth.service';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { ResourceModule } from '@ngx-resource/handler-ngx-http';
     ResourceModule.forRoot()
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

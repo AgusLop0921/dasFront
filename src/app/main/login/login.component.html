@@ -11,8 +11,8 @@
                     <label for="iemail">Email</label>
                     <input type="email" class="form-control" id="iemail" formControlName="email" placeholder="Ingresa tu correo">
                     <small *ngIf="submitted && form.email.errors" class="text-danger">
-                        <span *ngIf="form.email.errors.required">Debes informar tu correo</span>
-                        <span *ngIf="form.email.errors.email || form.email.errors.pattern">El correo no es válido</span>
+                        <span *ngIf="submitted && form.email.errors.required">Debes informar tu correo</span>
+                        <span *ngIf="submitted && form.email.errors.email || form.email.errors.pattern">El correo no es válido</span>
                     </small>
                 </div>	
             </div>

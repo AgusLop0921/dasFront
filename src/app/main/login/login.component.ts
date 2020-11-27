@@ -24,9 +24,6 @@ export class LoginComponent implements OnInit {
     private _userService: Users
   ) {   
 
-    if(this._authService.login()){
-      this._router.navigate(['main/home']);
-    }
       this.loginForm = this._fb.group({
         password: new FormControl('', [Validators.required, Validators.maxLength(255)]),
         email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
@@ -55,11 +52,20 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       console.log(this.loginForm.value);
       this._userService.login(user)
-        .subscribe(result => {
-            sessionStorage.setItem('token', result)
-            this._authService.setLogueado();
-            this._router.navigate(['/main/home']); 
-        })
+        .subscribe(response => {
+          console.log(response.token);
+          if(!response.token){
+            alert("El correo o la clave son incorrectas");
+            this.loginForm.reset();
+          }else{
+            sessionStorage.setItem('token', response.token)
+            this._authService.nextUserSubject(response);
+            this._router.navigate(['home']); 
+          }
+          this.submitted = false;
+        },()=> {
+          this.submitted = false;
+      })
     }
   }
 }
