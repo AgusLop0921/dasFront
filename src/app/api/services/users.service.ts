@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment';
 import { Validar } from '../models/validar';
@@ -7,14 +7,17 @@ import { Validar } from '../models/validar';
 @Injectable({
   providedIn: 'root'
 })
+
 export class Users {
   private url = ` ${environment.apiUrl}` 
   public redirectAfterLogin = ""
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     }),
   };
+
   constructor (
     private http: HttpClient
   ) { }
@@ -24,7 +27,15 @@ export class Users {
   }
 
   public login(user: Validar): Observable<any> {
-    return this.http.post(`${this.url}/login`,user, this.httpOptions);
+    const httpOptions2 = { headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', }), }; 
+    // const body = new HttpParams().set('correo', 'mpastarini@ubp.edu.ar').set('clave', 'pyxis'); 
+ 
+    // const body = {
+    //   correo: 'mpastarini@ubp.edu.ar',
+    //   clave: 'pyxis'
+    // }
+    const body = new HttpParams().set('correo', 'mpastarini@ubp.edu.ar').set('clave', 'pyxis');
+    return this.http.post(`${this.url}/login`, body ,this.httpOptions);
   }
 
 }
