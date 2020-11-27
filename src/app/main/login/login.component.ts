@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   submitted: boolean = false;
-
+  loading: boolean = true;
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
@@ -27,14 +27,7 @@ export class LoginComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       });
     }
-  ngOnInit(): void {
-
-    let token = localStorage.getItem('token'),
-    lastName  = localStorage.Apellido
-
-    console.log(token + lastName)
-
-   }
+  ngOnInit(): void { }
 
   get form(): any { 
     return this.loginForm.controls; 
@@ -48,10 +41,8 @@ export class LoginComponent implements OnInit {
       clave: this.form.password.value
     }
     if(this.loginForm.valid){
-      console.log(this.loginForm.value);
       this._userService.login(user)
         .subscribe(response => {
-          console.log(response.token);
           if(!response.token){
             alert("El correo o la clave son incorrectas");
             this.loginForm.reset();
@@ -61,6 +52,8 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['home']); 
           }
           this.submitted = false;
+          this.loading = false;
+
         },()=> {
           this.submitted = false;
       })

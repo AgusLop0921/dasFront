@@ -16,11 +16,9 @@ export class AppComponent {
     private _authService: AuthService
   ){
     const token: Token = {token: sessionStorage.getItem('token')}
-    console.log(token);
     if(token){
       this._authService.nextUserSubject(token);
       this._route.navigate(['home']);
-      console.log("entra")
     }
 
   }

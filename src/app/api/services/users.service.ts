@@ -31,14 +31,14 @@ export class Users {
     return this.http.post<Token>(`${this.url}/login`, body ,this.httpOptions);
   }
 
-  // public getUserData(): Observable<any>{
-  //   const token = sessionStorage.getItem('token');
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       'Autorization': 'Bearer alsjdaksjlbaskfaskfas'
-  //     }),
-  //   };
-  //   return this.http.get<any>(`${this.url}/user`,this.httpOptions);
-  // }
+  public getUserData(): Observable<any>{
+    const token = sessionStorage.getItem('token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      }),
+    };
+    return this.http.get<any>(`${this.url}/user`,httpOptions);
+  }
 }
